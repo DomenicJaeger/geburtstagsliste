@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geburtstagsliste/main.dart';
 import 'package:geburtstagsliste/presentation/pages/add_event_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/bottomNavigation.dart';
 import '../../models/event.dart';
 import '../../models/subject.dart';
-import 'package:geburtstagsliste/provider/reminder_app_state_provider.dart';
 
-class SingleSubjectView extends StatelessWidget {
+class SingleSubjectView extends ConsumerWidget {
   final Subject subject;
   final List<Event> events;
   const SingleSubjectView({Key? key, required this.subject, required this.events}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     List<Event> filteredEvents = events.where((event) => event.subjectId == subject.id).toList();
     // ignore: unused_local_variable
-    final reminderAppStateProvider = ReminderAppStateProvider();
+    final provider = ref.watch(refReminderAppStateProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         title: Text(subject.name),

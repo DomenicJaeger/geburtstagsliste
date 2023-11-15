@@ -1,54 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/models/event.dart';
-//import 'package:geburtstagsliste/provider/reminder_app_state_provider.dart';
+import 'package:geburtstagsliste/presentation/pages/subjects_view.dart';
 import '../../main.dart';
 import '../widgets/bottomNavigation.dart';
 
-//Creates a statelesswidget called AddEventView
 class AddEventView extends ConsumerWidget {
-  //Creates a constructor for the AddEventView class
   const AddEventView({Key? key}) : super(key: key);
 
-  //builds the widget
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //Creates three TextEditinControllers to manage the text in the TextFields
+    //Create TextEditinControllers for managing the title and subjectID inputs
     TextEditingController titleController = TextEditingController();
     TextEditingController subjectIdController = TextEditingController();
 
-    var chosenDate;
+    // Initialize a variable to store the selected date
+    DateTime? chosenDate;
+    //Access the reminderAppStateProvider using the watch method
     final provider = ref.watch(refReminderAppStateProvider.notifier);
 
-    // provider.addEvent(Event(title: title, date: date, subjectId: subjectId));
-
-    //Returns a Scaffold widget
     return Scaffold(
-      //Creates an Appbar with a title and a background color
       appBar: AppBar(
         title: const Text('Add Event'),
         backgroundColor: Colors.blueGrey.shade300,
       ),
-      //Creates a Container with a red background and padding
       body: Container(
         color: Colors.red,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          //Creates a Column with four children
           child: Column(
             children: <Widget>[
+              //Create a TextFormField for entering the event title
               TextFormField(
-                //Creates a TextFormField with a label and a controller
                 controller: titleController,
                 decoration: const InputDecoration(labelText: 'Title'),
               ),
+
               const SizedBox(height: 16.0),
+              //Add a TextButton to trigger the date picker dialog
               TextButton(
                   child: const Text('add Date'),
                   onPressed: () async {
+                    //show the date picker and store the selected date
                     chosenDate =
                         await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1970, 1, 1), lastDate: DateTime(2070, 1, 1));
                   }),
+
+              //Create a TextFormField for entering the event title
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: subjectIdController,
@@ -57,17 +55,22 @@ class AddEventView extends ConsumerWidget {
               const SizedBox(
                 height: 16.0,
               ),
-              //Creates an ElevatedButton with a label and an onPressed method
+
+              //Create an ElevatedButton to submit the event data
               ElevatedButton(
                 onPressed: () {
-                  //Retrieves the text from the three TextFields
+                  //Extract the title and subject ID from the controllers
                   String title = titleController.text;
                   String subjectId = subjectIdController.text;
+                  //Check if a date was selected and create an Event object
                   if (chosenDate != null) {
-                    provider.addEvent(Event(title: title, date: chosenDate, subjectId: subjectId));
+                    //Add the event to the global app state using the provider
+                    provider.addEvent(Event(title: title, date: chosenDate!, subjectId: subjectId));
                   }
-                  //Return to the last screen
-                  Navigator.pop(context);
+
+                  //Navigate to the SubectsView page after submitting the event
+                  //should later be changed to the SingleSubjectView of the id
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const SubjectsView()));
                 },
                 child: const Text('Submit'),
               ),
