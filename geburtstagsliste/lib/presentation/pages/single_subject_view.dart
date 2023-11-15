@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:geburtstagsliste/presentation/pages/add_event_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/bottomNavigation.dart';
 import '../../models/event.dart';
 import '../../models/subject.dart';
@@ -12,6 +13,7 @@ class SingleSubjectView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Event> filteredEvents = events.where((event) => event.subjectId == subject.id).toList();
+    // ignore: unused_local_variable
     final reminderAppStateProvider = ReminderAppStateProvider();
     return Scaffold(
       appBar: AppBar(
@@ -28,7 +30,7 @@ class SingleSubjectView extends StatelessWidget {
               trailing: IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
-                  reminderAppStateProvider.deleteEvent(event);
+                  /*reminderAppStateProvider.deleteEvent(event);*/
                 },
               ));
         },
@@ -37,7 +39,10 @@ class SingleSubjectView extends StatelessWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
-          //do something
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const AddEventView()),
+          );
         },
       ),
     );

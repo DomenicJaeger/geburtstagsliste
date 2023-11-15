@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/models/event.dart';
 import 'package:geburtstagsliste/models/state.dart';
@@ -60,6 +62,12 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
 
   void deleteSubject(Subject subjectToBeDeleted) {
     state = state.copyWith(subjects: state.subjects.where((e) => e != subjectToBeDeleted).toList());
+  }
+
+  void addEvent(Event event) {
+    log('${state.events}');
+    state = state.copyWith(events: [...state.events, event]);
+    log('${state.events}');
   }
 
   // Gets the subject with the given ID from the state.
