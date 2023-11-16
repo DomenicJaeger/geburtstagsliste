@@ -6,13 +6,14 @@ import '../../main.dart';
 import '../widgets/bottomNavigation.dart';
 
 class AddEventView extends ConsumerWidget {
-  const AddEventView({Key? key}) : super(key: key);
+  final String subjectId;
+  const AddEventView({Key? key, required this.subjectId}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    String newSubjectId = subjectId;
     //Create TextEditinControllers for managing the title and subjectID inputs
     TextEditingController titleController = TextEditingController();
-    TextEditingController subjectIdController = TextEditingController();
 
     // Initialize a variable to store the selected date
     DateTime? chosenDate;
@@ -30,8 +31,13 @@ class AddEventView extends ConsumerWidget {
           children: <Widget>[
             //Create a TextFormField for entering the event title
             TextFormField(
+              autofocus: true,
               controller: titleController,
-              decoration: const InputDecoration(labelText: 'Title'),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  labelText: 'Title'),
               maxLength: 16,
             ),
 
@@ -48,8 +54,13 @@ class AddEventView extends ConsumerWidget {
             //Create a TextFormField for entering the event title
             const SizedBox(height: 16.0),
             TextFormField(
-              controller: subjectIdController,
-              decoration: const InputDecoration(labelText: 'subjectID'),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  labelText: 'subjectID'),
+              initialValue: newSubjectId,
+              readOnly: true,
             ),
             const SizedBox(
               height: 16.0,
@@ -60,11 +71,10 @@ class AddEventView extends ConsumerWidget {
               onPressed: () {
                 //Extract the title and subject ID from the controllers
                 String title = titleController.text;
-                String subjectId = subjectIdController.text;
                 //Check if a date was selected and create an Event object
                 if (chosenDate != null) {
                   //Add the event to the global app state using the provider
-                  provider.addEvent(Event(title: title, date: chosenDate!, subjectId: subjectId));
+                  provider.addEvent(Event(title: title, date: chosenDate!, subjectId: newSubjectId));
                 }
 
                 //Navigate to the SubectsView page after submitting the event

@@ -40,9 +40,12 @@ class SingleSubjectView extends ConsumerWidget {
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         onPressed: () {
+          String subjectId = subject.id;
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AddEventView()),
+            MaterialPageRoute(
+              builder: (context) => AddEventView(subjectId: subjectId),
+            ),
           );
         },
       ),

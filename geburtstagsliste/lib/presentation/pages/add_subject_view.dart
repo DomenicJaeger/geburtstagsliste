@@ -26,13 +26,22 @@ class AddSubjectView extends ConsumerWidget {
         child: Column(
           children: [
             TextFormField(
+              autofocus: true,
               controller: nameController,
-              decoration: const InputDecoration(labelText: 'Subject Name'),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  labelText: 'Subject Name'),
             ),
             const SizedBox(height: 16.0),
             TextFormField(
               controller: idController,
-              decoration: const InputDecoration(labelText: 'Subject ID'),
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  labelText: 'Subject ID'),
             ),
             const SizedBox(
               height: 16.0,

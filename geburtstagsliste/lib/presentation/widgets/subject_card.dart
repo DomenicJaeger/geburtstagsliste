@@ -55,9 +55,14 @@ class SubjectCard extends ConsumerWidget {
                       ),
                     ),
                     Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(subject.name),
                       ],
+                    ),
+                    InkWell(
+                      child: const Icon(Icons.delete),
+                      onTap: () {},
                     ),
                   ],
                 ),
