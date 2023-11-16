@@ -41,13 +41,13 @@ class BottomNavigationBarWidget extends ConsumerWidget {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView()));
             break;
           case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsView()));
-            break;
-          case 2:
             Navigator.push(context, MaterialPageRoute(builder: (context) => const SubjectsView()));
             break;
-          case 3:
+          case 2:
             Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSubjectView()));
+            break;
+          case 3:
+            Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsView()));
             break;
         }
       },
@@ -64,18 +64,18 @@ class BottomNavigationBarWidget extends ConsumerWidget {
         ),
         BottomNavigationBarItem(
           backgroundColor: Colors.blueGrey.shade300,
-          icon: const Icon(Icons.settings),
-          label: 'Settings',
-        ),
-        BottomNavigationBarItem(
-          backgroundColor: Colors.blueGrey.shade300,
           icon: const Icon(Icons.person),
           label: 'Subjects',
         ),
         BottomNavigationBarItem(
           backgroundColor: Colors.blueGrey.shade300,
           icon: const Icon(Icons.person_add),
-          label: 'Add',
+          label: 'Add Subject',
+        ),
+        BottomNavigationBarItem(
+          backgroundColor: Colors.blueGrey.shade300,
+          icon: const Icon(Icons.settings),
+          label: 'Settings',
         ),
       ],
     );

@@ -38,7 +38,6 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
         Event(title: 'Geburtstag', date: DateTime(1980, 2, 12), subjectId: '009'),
         Event(title: 'Geburtstag', date: DateTime(1995, 6, 1), subjectId: '010'),
         Event(title: 'Geburtstag', date: DateTime(1993, 5, 29), subjectId: '011'),
-        Event(title: 'Erstes gemeinsames Treffen', date: DateTime(2002, 5, 19), subjectId: '006'),
         Event(title: 'Betriebsjubiläum', date: DateTime(1999, 3, 25), subjectId: '006'),
       ],
     );
@@ -68,6 +67,10 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
     log('${state.events}');
     state = state.copyWith(events: [...state.events, event]);
     log('${state.events}');
+  }
+
+  void addSubject(Subject subject) {
+    state = state.copyWith(subjects: [...state.subjects, subject]);
   }
 
   // Gets the subject with the given ID from the state.
