@@ -29,7 +29,7 @@ class Event {
   Map<String, dynamic> toJson() {
     return {
       'title': title,
-      'date': date,
+      'date': date.toIso8601String(),
       'subjectId': subjectId,
     };
   }
@@ -38,7 +38,7 @@ class Event {
   factory Event.fromJson(Map<String, dynamic> json) {
     return Event(
       title: json['title'],
-      date: json['date'],
+      date: DateTime.parse(json['date']),
       subjectId: json['subjectId'],
     );
   }

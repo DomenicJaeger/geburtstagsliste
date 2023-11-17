@@ -34,8 +34,11 @@ class ReminderAppState {
   // Creates a new state from a JSON object.
   factory ReminderAppState.fromJson(Map<String, dynamic> json) {
     return ReminderAppState(
-      subjects: json['subjects'].map((subject) => Subject.fromJson(subject)).toList(),
-      events: json['events'].map((event) => Event.fromJson(event)).toList(),
+      subjects: json['subjects'].map<Subject>((subject) {
+        print(subject);
+        return Subject.fromJson(subject);
+      }).toList(),
+      events: json['events'].map<Event>((event) => Event.fromJson(event)).toList(),
     );
   }
 }
