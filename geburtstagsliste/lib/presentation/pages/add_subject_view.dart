@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/main.dart';
 import 'package:geburtstagsliste/presentation/pages/home_view.dart';
-
+import 'package:uuid/uuid.dart';
 import '../../models/subject.dart';
 import '../widgets/bottomNavigation.dart';
 
@@ -12,9 +12,10 @@ class AddSubjectView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     TextEditingController nameController = TextEditingController();
-    TextEditingController idController = TextEditingController();
 
     final provider = ref.watch(refReminderAppStateProvider.notifier);
+    var uuid = Uuid();
+    var newUuid = uuid.v4();
 
     return Scaffold(
       appBar: AppBar(
@@ -34,22 +35,13 @@ class AddSubjectView extends ConsumerWidget {
                   ),
                   labelText: 'Subject Name'),
             ),
-            const SizedBox(height: 16.0),
-            TextFormField(
-              controller: idController,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  labelText: 'Subject ID'),
-            ),
             const SizedBox(
               height: 16.0,
             ),
             ElevatedButton(
               onPressed: () {
                 String name = nameController.text;
-                String id = idController.text;
+                String id = newUuid;
 
                 provider.addSubject(Subject(name: name, id: id));
                 Navigator.push(

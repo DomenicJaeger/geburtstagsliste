@@ -6,20 +6,24 @@ class ReminderAppState {
   final List<Subject> subjects;
   // The list of events for which reminders are set
   final List<Event> events;
+  final bool initialized;
 
   ReminderAppState({
     required this.subjects,
     required this.events,
+    required this.initialized,
   });
 
   // Creates a copy of the state with the given updates.
   ReminderAppState copyWith({
     List<Subject>? subjects,
     List<Event>? events,
+    bool? initialized,
   }) {
     return ReminderAppState(
       subjects: subjects ?? this.subjects,
       events: events ?? this.events,
+      initialized: initialized ?? this.initialized,
     );
   }
 
@@ -39,6 +43,7 @@ class ReminderAppState {
         return Subject.fromJson(subject);
       }).toList(),
       events: json['events'].map<Event>((event) => Event.fromJson(event)).toList(),
+      initialized: false,
     );
   }
 }

@@ -11,7 +11,6 @@ class SubjectsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(refReminderAppStateProvider);
-    state.subjects.sort((a, b) => a.name.toLowerCase().compareTo(b.name.toLowerCase()));
     return Scaffold(
       appBar: AppBar(
         title: const Text('Subjects'),

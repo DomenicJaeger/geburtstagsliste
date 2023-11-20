@@ -31,7 +31,7 @@ class SingleSubjectView extends ConsumerWidget {
               trailing: IconButton(
                 icon: const Icon(Icons.delete),
                 onPressed: () {
-                  /*reminderAppStateProvider.deleteEvent(event);*/
+                  provider.deleteEvent(event);
                 },
               ));
         },

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:geburtstagsliste/models/event.dart';
-import 'package:geburtstagsliste/models/state.dart';
+import 'package:geburtstagsliste/models/reminder_app_state.dart';
 import 'package:geburtstagsliste/models/subject.dart';
 
 void main() {
@@ -35,6 +35,7 @@ void main() {
         Event(title: 'Geburtstag', date: DateTime(1993, 5, 29), subjectId: '011'),
         Event(title: 'Betriebsjubiläum', date: DateTime(1999, 3, 25), subjectId: '006'),
       ],
+      initialized: true,
     );
     final json1 = appState1.toJson();
 
