@@ -62,7 +62,9 @@ class SubjectCard extends ConsumerWidget {
                     ),
                     InkWell(
                       child: const Icon(Icons.delete),
-                      onTap: () {},
+                      onTap: () {
+                        stateProvider.deleteSubject(subject);
+                      },
                     ),
                   ],
                 ),

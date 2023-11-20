@@ -16,13 +16,20 @@ class HomeView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Get the current state of the reminder app from the widget tree.
     final state = ref.watch(refReminderAppStateProvider);
-
+    final stateProvider = ref.read(refReminderAppStateProvider.notifier);
     state.events.sort((a, b) => daysUntilEvent(a) - daysUntilEvent(b));
 
     //Build a Scaffold widget with an AppBar and a Column widget containing the EventCard widgets
     //for eacht event in the state.
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          IconButton(
+              onPressed: () {
+                stateProvider.save();
+              },
+              icon: Icon(Icons.storage))
+        ],
         title: const Text('Birthday Reminder'),
         backgroundColor: Colors.blueGrey.shade300,
       ),

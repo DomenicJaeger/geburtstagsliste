@@ -1,9 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/models/event.dart';
 import 'package:geburtstagsliste/models/state.dart';
 import 'package:geburtstagsliste/models/subject.dart';
+import 'package:path_provider/path_provider.dart';
 
 //This class provides the state for the reminder app
 class ReminderAppStateProvider extends Notifier<ReminderAppState> {
@@ -23,6 +26,7 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
         Subject(id: '009', name: 'Mario'),
         Subject(id: '010', name: 'Emil'),
         Subject(id: '011', name: 'Jenny'),
+        Subject(id: '012', name: 'Alex')
       ],
       events: [
         Event(title: 'Geburtstag', date: DateTime(1989, 11, 2), subjectId: '001'),
@@ -39,6 +43,7 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
         Event(title: 'Geburtstag', date: DateTime(1995, 6, 1), subjectId: '010'),
         Event(title: 'Geburtstag', date: DateTime(1993, 5, 29), subjectId: '011'),
         Event(title: 'Betriebsjubiläum', date: DateTime(1999, 3, 25), subjectId: '006'),
+        Event(title: 'Geburtstag', date: DateTime(1985, 5, 26), subjectId: '012'),
       ],
     );
   }
@@ -81,5 +86,26 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
     }
     //If no subject with the given ID is found, return 'null'
     return null;
+  }
+
+  void save() async {
+    final appDocumentsDir = await getApplicationDocumentsDirectory();
+    print(appDocumentsDir.path);
+    final file = File('${appDocumentsDir.path}/state.json');
+    final jsonString = jsonEncode(state);
+    file.writeAsString(jsonString);
+  }
+
+  Future<void> load() async {
+    final appDocumentsDir = await getApplicationDocumentsDirectory();
+    final file = File('${appDocumentsDir.path}/state.json');
+
+    if (await file.exists()) {
+      final jsonString = await file.readAsString();
+      final loadedState = jsonDecode(jsonString) as Map<String, dynamic>;
+      state = state.copyWith(
+          subjects: List<Subject>.from(loadedState['subjects'].map((s) => Subject.fromJson(s))),
+          events: List<Event>.from(loadedState['events'].map((e) => Event.fromJson(e))));
+    }
   }
 }

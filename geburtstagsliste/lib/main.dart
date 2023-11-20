@@ -5,7 +5,7 @@ import 'package:geburtstagsliste/presentation/pages/home_view.dart';
 import 'package:geburtstagsliste/provider/reminder_app_state_provider.dart';
 
 // The main entry point for the app.
-void main() {
+void main() async {
   // Wrap the app in a ProviderScope widget so that the ReminderAppStateProvider
   // can be accessed from anywhere in the widget tree
   runApp(
@@ -16,8 +16,18 @@ void main() {
 }
 
 // A provider that provides a ReminderAppState object.
+// final refReminderAppStateProvider = NotifierProvider<ReminderAppStateProvider, ReminderAppState>(
+//   () => ReminderAppStateProvider(),
+//   ReminderAppStateProvider.load();
+//   return ReminderAppStateProvider;
+// );
+
 final refReminderAppStateProvider = NotifierProvider<ReminderAppStateProvider, ReminderAppState>(
-  () => ReminderAppStateProvider(),
+  () {
+    final reminderAppStateProvider = ReminderAppStateProvider();
+    reminderAppStateProvider.load();
+    return reminderAppStateProvider;
+  },
 );
 
 // The main app class.
