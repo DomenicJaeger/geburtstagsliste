@@ -16,30 +16,29 @@ void main() async {
 }
 
 // A provider that provides a ReminderAppState object.
-// final refReminderAppStateProvider = NotifierProvider<ReminderAppStateProvider, ReminderAppState>(
-//   () => ReminderAppStateProvider(),
-//   ReminderAppStateProvider.load();
-//   return ReminderAppStateProvider;
-// );
-
 final refReminderAppStateProvider = NotifierProvider<ReminderAppStateProvider, ReminderAppState>(
   () {
+    // Initialize the ReminderAppStateProvider instace
     final reminderAppStateProvider = ReminderAppStateProvider();
+    // Load the initial state of the reminders
     reminderAppStateProvider.load();
+    // Return the initialized ReminderAppStateProvider
     return reminderAppStateProvider;
   },
 );
 
-// The main app class.
+// The main app widget.
 class MainApp extends ConsumerWidget {
   const MainApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Return a MaterialApp widget with the HomeView as its home page.
+    // Listen for changes to the ReminderAppStateProvider
     ref.listen(refReminderAppStateProvider, (previous, next) {
+      // Check of the previous state was initialized
       if (previous != null) {
         if (previous.initialized) {
+          // Save the current state of the reminders
           final provider = ref.read(refReminderAppStateProvider.notifier);
           provider.save();
         }

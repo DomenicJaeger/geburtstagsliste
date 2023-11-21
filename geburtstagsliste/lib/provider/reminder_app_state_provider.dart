@@ -13,6 +13,7 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
   // List of subjects and list of events for whom reminders are set
   @override
   ReminderAppState build() {
+    // Initialize the state with empty lists of subjects and events, and set initialized to false
     return ReminderAppState(
       subjects: [],
       events: [],
@@ -22,17 +23,6 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
 
   //Deletes the given event from the state.
   void deleteEvent(Event eventToBeDeleted) {
-    ////Create a new list of events without the event to be deleted.
-    // final newEvents = <Event>[];
-    // for (final e in state.events) {
-    //   if (e != eventToBeDeleted) {
-    //     newEvents.add(e);
-    //   }
-    // }
-    ////Update the state with the new list of events
-    // state = state.copyWith(events: newEvents);
-
-    //another way to do the above, using the 'where()' method to filter out the event to be deleted
     state = state.copyWith(events: state.events.where((e) => e != eventToBeDeleted).toList());
   }
 
@@ -45,11 +35,13 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
 
   void addEvent(Event event) {
     log('${state.events}');
+    // Add the event to the list of subjects in the state
     state = state.copyWith(events: [...state.events, event]);
     log('${state.events}');
   }
 
   void addSubject(Subject subject) {
+    // Adds the subject to the list of subjects in the state
     state = state.copyWith(subjects: [...state.subjects, subject]);
   }
 
@@ -64,20 +56,29 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
   }
 
   void save() async {
+    // Gets the directory to store the app's data
     final appDocumentsDir = await getApplicationDocumentsDirectory();
     print(appDocumentsDir.path);
+    // Creates a file to store the state
     final file = File('${appDocumentsDir.path}/state.json');
+    // Converts the state to a JSON string
     final jsonString = jsonEncode(state);
+    // Writes the JSON string to the file
     file.writeAsString(jsonString);
   }
 
   Future<void> load() async {
+    // Gets the directory to store the app's data
     final appDocumentsDir = await getApplicationDocumentsDirectory();
+    // Creates a file to store the state
     final file = File('${appDocumentsDir.path}/state.json');
-
+    // Check of the file exists
     if (await file.exists()) {
+      // Reads the JSON string from the file
       final jsonString = await file.readAsString();
+      // Decodes the JSON string into a Map
       final loadedState = jsonDecode(jsonString) as Map<String, dynamic>;
+      // Updates the state with the loaded data
       state = state.copyWith(
         subjects: List<Subject>.from(loadedState['subjects'].map((s) => Subject.fromJson(s))),
         events: List<Event>.from(
@@ -88,6 +89,7 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
         initialized: true,
       );
     } else {
+      // If the file does not exist, create an empty state
       state = ReminderAppState(
         subjects: [],
         events: [],

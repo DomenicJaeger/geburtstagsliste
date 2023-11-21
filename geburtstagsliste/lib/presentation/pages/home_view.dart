@@ -16,11 +16,12 @@ class HomeView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     // Get the current state of the reminder app from the widget tree.
     final state = ref.watch(refReminderAppStateProvider);
+    // Get a reference to the notifier for the reminder app state using the 'ref' object
     final stateProvider = ref.read(refReminderAppStateProvider.notifier);
+    // Sort the events in the state by the number of days until the event
     state.events.sort((a, b) => daysUntilEvent(a) - daysUntilEvent(b));
 
-    //Build a Scaffold widget with an AppBar and a Column widget containing the EventCard widgets
-    //for eacht event in the state.
+    //Build a Scaffold widget with an AppBar, a Column and a BottomNavigationBar
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -36,6 +37,7 @@ class HomeView extends ConsumerWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView(
+          // Create a list of EventCard widgets for eacht event in the state
           children: [
             for (final event in state.events) EventCard(event: event),
           ],

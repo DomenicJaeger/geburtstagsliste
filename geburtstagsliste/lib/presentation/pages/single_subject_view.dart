@@ -13,8 +13,10 @@ class SingleSubjectView extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // Filter the events to only show those for the current subject
     List<Event> filteredEvents = events.where((event) => event.subjectId == subject.id).toList();
     // ignore: unused_local_variable
+    // Get the provider for the app state
     final provider = ref.watch(refReminderAppStateProvider.notifier);
     return Scaffold(
       appBar: AppBar(
@@ -24,21 +26,26 @@ class SingleSubjectView extends ConsumerWidget {
       body: ListView.builder(
         itemCount: filteredEvents.length,
         itemBuilder: (context, index) {
+          // Get the event at the current index
           final event = filteredEvents[index];
           return ListTile(
-              title: Text(event.title),
-              subtitle: Text('${event.date.day}.${event.date.month}.${event.date.year}'),
-              trailing: IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () {
-                  provider.deleteEvent(event);
-                },
-              ));
+            title: Text(event.title),
+            //Display the date of the event in a formated string
+            subtitle: Text('${event.date.day}.${event.date.month}.${event.date.year}'),
+            trailing: IconButton(
+              icon: const Icon(Icons.delete),
+              // Delete the event when the delete icon is tapped
+              onPressed: () {
+                provider.deleteEvent(event);
+              },
+            ),
+          );
         },
       ),
       bottomNavigationBar: const BottomNavigationBarWidget(),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
+        // Open the add event view when the floating action button is tapped
         onPressed: () {
           String subjectId = subject.id;
           Navigator.push(

@@ -45,6 +45,6 @@ class Subject {
     if (other.runtimeType != Subject) return false;
     if (id != (other as Subject).id) return false;
     if (name != other.name) return false;
-    return true;
+    return true; // if all comparisons are true, the objects are considered equal
   }
 }

@@ -54,18 +54,21 @@ class SubjectCard extends ConsumerWidget {
                         child: const Text('BILD'),
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(subject.name),
-                      ],
-                    ),
-                    InkWell(
-                      child: const Icon(Icons.delete),
-                      onTap: () {
-                        stateProvider.deleteSubject(subject);
-                      },
-                    ),
+                    Text(subject.name),
+                    SizedBox(
+                      width: 50.0,
+                      height: 50.0,
+                      child: Container(
+                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(30.0), color: Colors.grey.shade200),
+                        child: IconButton(
+                          onPressed: () {
+                            stateProvider.deleteSubject(subject);
+                          },
+                          icon: const Icon(Icons.delete),
+                          color: Colors.grey.shade700,
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
