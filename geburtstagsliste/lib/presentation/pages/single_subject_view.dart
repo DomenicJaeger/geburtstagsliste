@@ -8,16 +8,16 @@ import '../../models/subject.dart';
 
 class SingleSubjectView extends ConsumerWidget {
   final Subject subject;
-  final List<Event> events;
-  const SingleSubjectView({Key? key, required this.subject, required this.events}) : super(key: key);
+  const SingleSubjectView({Key? key, required this.subject}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Filter the events to only show those for the current subject
-    List<Event> filteredEvents = events.where((event) => event.subjectId == subject.id).toList();
     // ignore: unused_local_variable
     // Get the provider for the app state
     final provider = ref.watch(refReminderAppStateProvider.notifier);
+    final state = ref.watch(refReminderAppStateProvider);
+    List<Event> filteredEvents = state.events.where((event) => event.subjectId == subject.id).toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(subject.name),

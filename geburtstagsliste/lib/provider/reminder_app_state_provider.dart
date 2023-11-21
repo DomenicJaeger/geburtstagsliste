@@ -58,7 +58,6 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
   void save() async {
     // Gets the directory to store the app's data
     final appDocumentsDir = await getApplicationDocumentsDirectory();
-    print(appDocumentsDir.path);
     // Creates a file to store the state
     final file = File('${appDocumentsDir.path}/state.json');
     // Converts the state to a JSON string

@@ -75,12 +75,13 @@ class SubjectCard extends ConsumerWidget {
             ),
             onTap: () {
               // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
-              final events = stateProvider.state.events;
-              final filteredEvents = events.where((event) => event.subjectId == subject.id).toList();
 
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SingleSubjectView(subject: subject, events: filteredEvents)),
+                MaterialPageRoute(
+                    builder: (context) => SingleSubjectView(
+                          subject: subject,
+                        )),
               );
               // Delete the event from the state when the container is tapped.
               //stateProvider.deleteSubject(subject);

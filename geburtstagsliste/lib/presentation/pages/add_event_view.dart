@@ -38,7 +38,7 @@ class AddEventView extends ConsumerWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   labelText: 'Title'),
-              maxLength: 16,
+              maxLength: 32,
             ),
 
             const SizedBox(height: 16.0),
