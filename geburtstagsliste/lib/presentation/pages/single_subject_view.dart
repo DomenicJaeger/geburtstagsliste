@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geburtstagsliste/main.dart';
 import 'package:geburtstagsliste/presentation/pages/add%20pages/add_event_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/bottomNavigation.dart';
@@ -28,16 +29,39 @@ class SingleSubjectView extends ConsumerWidget {
         itemBuilder: (context, index) {
           // Get the event at the current index
           final event = filteredEvents[index];
-          return ListTile(
-            title: Text(event.title),
-            //Display the date of the event in a formated string
-            subtitle: Text('${event.date.day}.${event.date.month}.${event.date.year}'),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              // Delete the event when the delete icon is tapped
-              onPressed: () {
-                provider.deleteEvent(event);
-              },
+          return Slidable(
+            startActionPane: ActionPane(motion: DrawerMotion(), children: [
+              SlidableAction(
+                onPressed: ((context) {
+                  // do something
+                }),
+                backgroundColor: Colors.blue,
+                label: 'notes',
+                icon: Icons.comment_rounded,
+              ),
+              SlidableAction(
+                onPressed: ((context) {
+                  // do something
+                }),
+                backgroundColor: Colors.green,
+                label: 'Edit',
+                icon: Icons.edit,
+              ),
+            ]),
+            endActionPane: ActionPane(motion: DrawerMotion(), children: [
+              SlidableAction(
+                onPressed: ((context) {
+                  provider.deleteEvent(event);
+                }),
+                backgroundColor: Colors.red,
+                label: 'Delete',
+                icon: Icons.delete,
+              ),
+            ]),
+            child: ListTile(
+              title: Text(event.title),
+              //Display the date of the event in a formated string
+              subtitle: Text('${event.date.day}.${event.date.month}.${event.date.year}'),
             ),
           );
         },

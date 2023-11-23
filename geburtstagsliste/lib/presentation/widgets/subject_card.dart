@@ -83,8 +83,6 @@ class SubjectCard extends ConsumerWidget {
                           subject: subject,
                         )),
               );
-              // Delete the event from the state when the container is tapped.
-              //stateProvider.deleteSubject(subject);
             },
           ),
         ),

@@ -30,7 +30,7 @@ class HomeView extends ConsumerWidget {
         child: ListView(
           // Create a list of EventCard widgets for eacht event in the state
           children: [
-            for (final event in state.events) EventCard(event: event),
+            for (final event in state.events) EventCard(event: event, subject: state.subjects.firstWhere((element) => element.id == event.subjectId)),
           ],
         ),
       ),

@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/main.dart';
 import 'package:geburtstagsliste/models/event.dart';
+import 'package:geburtstagsliste/presentation/pages/single_subject_view.dart';
+
+import '../../models/subject.dart';
 
 int daysUntilEvent(Event event) {
   //Get today's date and time
@@ -26,9 +29,11 @@ class EventCard extends ConsumerWidget {
   const EventCard({
     super.key,
     required this.event,
+    required this.subject,
   });
 
   final Event event;
+  final Subject subject;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -126,8 +131,14 @@ class EventCard extends ConsumerWidget {
               ),
             ),
             onTap: () {
-              // Delete the event from the state when the container is tapped.
-              stateProvider.deleteEvent(event);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SingleSubjectView(
+                    subject: subject!,
+                  ),
+                ),
+              );
             },
           ),
         ),

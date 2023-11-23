@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geburtstagsliste/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/presentation/pages/add%20pages/add_subject_view.dart';
@@ -14,6 +15,7 @@ class SubjectsView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Retrieve the current state from the Riverpod provider
+    final provider = ref.watch(refReminderAppStateProvider.notifier);
     final state = ref.watch(refReminderAppStateProvider);
     final sortedSubjects = List<Subject>.from(state.subjects)..sort((a, b) => a.name.compareTo(b.name));
     return Scaffold(
@@ -28,8 +30,38 @@ class SubjectsView extends ConsumerWidget {
           children: [
             // Iterate over the list of subjects and create a new SubjectCard widget for each one
             for (final subject in sortedSubjects)
-              SubjectCard(
-                subject: subject,
+              Slidable(
+                startActionPane: ActionPane(motion: DrawerMotion(), children: [
+                  SlidableAction(
+                    onPressed: ((context) {
+                      // do something
+                    }),
+                    backgroundColor: Colors.blue,
+                    label: 'notes',
+                    icon: Icons.comment_rounded,
+                  ),
+                  SlidableAction(
+                    onPressed: ((context) {
+                      // do something
+                    }),
+                    backgroundColor: Colors.green,
+                    label: 'Edit',
+                    icon: Icons.edit,
+                  ),
+                ]),
+                endActionPane: ActionPane(motion: DrawerMotion(), children: [
+                  SlidableAction(
+                    onPressed: ((context) {
+                      provider.deleteSubject(subject);
+                    }),
+                    backgroundColor: Colors.red,
+                    label: 'Delete',
+                    icon: Icons.delete,
+                  ),
+                ]),
+                child: SubjectCard(
+                  subject: subject,
+                ),
               )
           ],
         ),
