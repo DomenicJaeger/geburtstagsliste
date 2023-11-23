@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/main.dart';
-import 'package:geburtstagsliste/presentation/pages/home_view.dart';
+import 'package:geburtstagsliste/presentation/pages/subjects_view.dart';
 import 'package:uuid/uuid.dart';
-import '../../models/subject.dart';
-import '../widgets/bottomNavigation.dart';
+import '../../../models/subject.dart';
+import '../../widgets/bottomNavigation.dart';
 
 //This class represents the view for adding a new subject
-class AddSubjectView extends ConsumerWidget {
+class EditSubjectView extends ConsumerWidget {
   // Constructor for the AddSubjectView widget
-  const AddSubjectView({Key? key}) : super(key: key);
+  const EditSubjectView({Key? key}) : super(key: key);
 
   // Build the widget's UI
   @override
@@ -19,12 +19,12 @@ class AddSubjectView extends ConsumerWidget {
     // Access the provider responsible for managing subjects
     final provider = ref.watch(refReminderAppStateProvider.notifier);
     // Generate a unique ID for the new subject
-    var uuid = Uuid();
+    var uuid = const Uuid();
     var newUuid = uuid.v4();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Subject'),
+        title: const Text('Edit Subject'),
         backgroundColor: Colors.blueGrey.shade300,
       ),
       body: Padding(
@@ -39,7 +39,7 @@ class AddSubjectView extends ConsumerWidget {
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  labelText: 'Subject Name'),
+                  labelText: 'Edit Subject Name'),
             ),
             const SizedBox(
               height: 16.0,
@@ -55,11 +55,11 @@ class AddSubjectView extends ConsumerWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const HomeView(),
+                    builder: (context) => const SubjectsView(),
                   ),
                 );
               },
-              child: const Text('Submit'),
+              child: const Text('Submit Changes'),
             ),
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/main.dart';
-import 'package:geburtstagsliste/presentation/pages/add_event_view.dart';
+import 'package:geburtstagsliste/presentation/pages/add%20pages/add_event_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/bottomNavigation.dart';
 import '../../models/event.dart';
 import '../../models/subject.dart';
@@ -43,6 +43,7 @@ class SingleSubjectView extends ConsumerWidget {
         },
       ),
       bottomNavigationBar: const BottomNavigationBarWidget(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),
         // Open the add event view when the floating action button is tapped

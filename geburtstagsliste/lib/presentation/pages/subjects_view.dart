@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geburtstagsliste/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:geburtstagsliste/presentation/pages/add%20pages/add_subject_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/subject_card.dart';
 
 import '../../models/subject.dart';
@@ -21,6 +22,7 @@ class SubjectsView extends ConsumerWidget {
         backgroundColor: Colors.blueGrey.shade300,
       ),
       body: Padding(
+        // padding: const EdgeInsets.only(left: 8.0, top:8.0, right: 8.0, bottom: 32.0),
         padding: const EdgeInsets.all(8.0),
         child: ListView(
           children: [
@@ -33,6 +35,19 @@ class SubjectsView extends ConsumerWidget {
         ),
       ),
       bottomNavigationBar: const BottomNavigationBarWidget(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        // Open the add event view when the floating action button is tapped
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const AddSubjectView(),
+            ),
+          );
+        },
+      ),
     );
   }
 }

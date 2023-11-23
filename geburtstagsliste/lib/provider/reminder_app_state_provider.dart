@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/models/event.dart';
 import 'package:geburtstagsliste/models/reminder_app_state.dart';
@@ -96,4 +95,8 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
       );
     }
   }
+
+  void saveChangedEvent() {}
+
+  void saveChangedSubject() {}
 }

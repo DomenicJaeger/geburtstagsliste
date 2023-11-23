@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/models/event.dart';
 import 'package:geburtstagsliste/presentation/pages/subjects_view.dart';
-import '../../main.dart';
-import '../widgets/bottomNavigation.dart';
+import '../../../main.dart';
+import '../../widgets/bottomNavigation.dart';
 
 class AddEventView extends ConsumerWidget {
   final String subjectId;

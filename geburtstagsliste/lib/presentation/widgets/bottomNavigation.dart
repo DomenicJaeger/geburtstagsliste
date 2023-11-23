@@ -1,7 +1,6 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:geburtstagsliste/presentation/pages/add_subject_view.dart';
 import 'package:geburtstagsliste/presentation/pages/settings_view.dart';
 import 'package:geburtstagsliste/presentation/pages/subjects_view.dart';
 import '../pages/home_view.dart';
@@ -22,6 +21,7 @@ class BottomNavigationBarWidget extends ConsumerWidget {
 
     //Return the BottomNavigationBar widget
     return BottomNavigationBar(
+      backgroundColor: Colors.blueGrey.shade300,
       //Set the selected item color to white
       selectedItemColor: Colors.white,
       //Set the unselected item color to white
@@ -44,9 +44,6 @@ class BottomNavigationBarWidget extends ConsumerWidget {
             Navigator.push(context, MaterialPageRoute(builder: (context) => const SubjectsView()));
             break;
           case 2:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSubjectView()));
-            break;
-          case 3:
             Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsView()));
             break;
         }
@@ -66,11 +63,6 @@ class BottomNavigationBarWidget extends ConsumerWidget {
           backgroundColor: Colors.blueGrey.shade300,
           icon: const Icon(Icons.person),
           label: 'Subjects',
-        ),
-        BottomNavigationBarItem(
-          backgroundColor: Colors.blueGrey.shade300,
-          icon: const Icon(Icons.person_add),
-          label: 'Add Subject',
         ),
         BottomNavigationBarItem(
           backgroundColor: Colors.blueGrey.shade300,
