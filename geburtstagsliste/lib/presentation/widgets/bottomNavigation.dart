@@ -38,13 +38,13 @@ class BottomNavigationBarWidget extends ConsumerWidget {
         //Navigate to the corresponding screen based on the selected index
         switch (index) {
           case 0:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeView()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeView()));
             break;
           case 1:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const SubjectsView()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SubjectsView()));
             break;
           case 2:
-            Navigator.push(context, MaterialPageRoute(builder: (context) => const SettingsView()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SettingsView()));
             break;
         }
       },

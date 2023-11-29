@@ -30,7 +30,7 @@ class SingleSubjectView extends ConsumerWidget {
           // Get the event at the current index
           final event = filteredEvents[index];
           return Slidable(
-            startActionPane: ActionPane(motion: DrawerMotion(), children: [
+            startActionPane: ActionPane(motion: const DrawerMotion(), children: [
               SlidableAction(
                 onPressed: ((context) {
                   // do something
@@ -48,7 +48,7 @@ class SingleSubjectView extends ConsumerWidget {
                 icon: Icons.edit,
               ),
             ]),
-            endActionPane: ActionPane(motion: DrawerMotion(), children: [
+            endActionPane: ActionPane(motion: const DrawerMotion(), children: [
               SlidableAction(
                 onPressed: ((context) {
                   provider.deleteEvent(event);
@@ -73,7 +73,7 @@ class SingleSubjectView extends ConsumerWidget {
         // Open the add event view when the floating action button is tapped
         onPressed: () {
           String subjectId = subject.id;
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => AddEventView(subjectId: subjectId),

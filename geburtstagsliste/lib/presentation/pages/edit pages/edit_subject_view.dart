@@ -52,7 +52,7 @@ class EditSubjectView extends ConsumerWidget {
                 String id = newUuid;
                 // Use the provider to add the new subject to the list
                 provider.addSubject(Subject(name: name, id: id));
-                Navigator.push(
+                Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const SubjectsView(),

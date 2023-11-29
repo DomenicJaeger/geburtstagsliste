@@ -45,9 +45,9 @@ class MainApp extends ConsumerWidget {
       }
     });
     return MaterialApp(
-      home: HomeView(),
+      home: const HomeView(),
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(useMaterial3: true, colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 177, 209, 252))),
+      theme: ThemeData(useMaterial3: true, colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 177, 209, 252))),
     );
   }
 }

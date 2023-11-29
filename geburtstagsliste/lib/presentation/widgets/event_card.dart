@@ -131,7 +131,7 @@ class EventCard extends ConsumerWidget {
               ),
             ),
             onTap: () {
-              Navigator.push(
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
                   builder: (context) => SingleSubjectView(

@@ -20,7 +20,7 @@ void main() {
 
   test('copyWith() testen', () {
     Event wichtigerTag = Event(title: 'wichtiger Tag', date: DateTime(1993, 5, 29), subjectId: 'Nummero Uno');
-    Event tagDanach = wichtigerTag.copyWith(date: wichtigerTag.date.add(Duration(days: 1)));
+    Event tagDanach = wichtigerTag.copyWith(date: wichtigerTag.date.add(const Duration(days: 1)));
 
     expect(tagDanach.date, DateTime(1993, 5, 30));
 

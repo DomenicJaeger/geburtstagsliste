@@ -25,13 +25,13 @@ class SubjectsView extends ConsumerWidget {
       ),
       body: Padding(
         // padding: const EdgeInsets.only(left: 8.0, top:8.0, right: 8.0, bottom: 32.0),
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 8.0),
         child: ListView(
           children: [
             // Iterate over the list of subjects and create a new SubjectCard widget for each one
             for (final subject in sortedSubjects)
               Slidable(
-                startActionPane: ActionPane(motion: DrawerMotion(), children: [
+                startActionPane: ActionPane(motion: const DrawerMotion(), children: [
                   SlidableAction(
                     onPressed: ((context) {
                       // do something
@@ -49,7 +49,7 @@ class SubjectsView extends ConsumerWidget {
                     icon: Icons.edit,
                   ),
                 ]),
-                endActionPane: ActionPane(motion: DrawerMotion(), children: [
+                endActionPane: ActionPane(motion: const DrawerMotion(), children: [
                   SlidableAction(
                     onPressed: ((context) {
                       provider.deleteSubject(subject);
@@ -72,7 +72,7 @@ class SubjectsView extends ConsumerWidget {
         child: const Icon(Icons.add),
         // Open the add event view when the floating action button is tapped
         onPressed: () {
-          Navigator.push(
+          Navigator.pushReplacement(
             context,
             MaterialPageRoute(
               builder: (context) => const AddSubjectView(),

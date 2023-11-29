@@ -79,7 +79,7 @@ class AddEventView extends ConsumerWidget {
 
                 //Navigate to the SubectsView page after submitting the event
                 //should later be changed to the SingleSubjectView of the id
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const SubjectsView()));
+                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const SubjectsView()));
               },
               child: const Text('Submit'),
             ),
