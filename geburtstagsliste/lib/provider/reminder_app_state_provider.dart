@@ -74,6 +74,10 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
     if (await file.exists()) {
       // Reads the JSON string from the file
       final jsonString = await file.readAsString();
+      if (jsonString.isEmpty) {
+        state = ReminderAppState.standart();
+        return;
+      }
       // Decodes the JSON string into a Map
       final loadedState = jsonDecode(jsonString) as Map<String, dynamic>;
       // Updates the state with the loaded data
@@ -94,6 +98,12 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
         initialized: true,
       );
     }
+  }
+
+  void editSubject(Subject updatedSubject) {
+    state = state.copyWith(
+      subjects: state.subjects.map((s) => s.id == updatedSubject.id ? updatedSubject : s).toList(),
+    );
   }
 
   void saveChangedEvent() {}

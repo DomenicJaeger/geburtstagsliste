@@ -1,10 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geburtstagsliste/main.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/presentation/pages/add%20pages/add_subject_view.dart';
+import 'package:geburtstagsliste/presentation/pages/edit%20pages/edit_subject_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/subject_card.dart';
-
 import '../../models/subject.dart';
 import '../widgets/bottomNavigation.dart';
 
@@ -34,15 +36,14 @@ class SubjectsView extends ConsumerWidget {
                 startActionPane: ActionPane(motion: const DrawerMotion(), children: [
                   SlidableAction(
                     onPressed: ((context) {
-                      // do something
-                    }),
-                    backgroundColor: Colors.blue,
-                    label: 'notes',
-                    icon: Icons.comment_rounded,
-                  ),
-                  SlidableAction(
-                    onPressed: ((context) {
-                      // do something
+                      final currentSubject = subject;
+                      log('Navigating to EditSubjectView with the subject: ${currentSubject.name} ${currentSubject.id}');
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditSubjectView(subject: currentSubject),
+                        ),
+                      );
                     }),
                     backgroundColor: Colors.green,
                     label: 'Edit',

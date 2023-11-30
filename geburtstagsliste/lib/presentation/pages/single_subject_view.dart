@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geburtstagsliste/main.dart';
 import 'package:geburtstagsliste/presentation/pages/add%20pages/add_event_view.dart';
+import 'package:geburtstagsliste/presentation/pages/edit%20pages/edit_event_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/bottomNavigation.dart';
 import '../../models/event.dart';
 import '../../models/subject.dart';
@@ -41,7 +42,12 @@ class SingleSubjectView extends ConsumerWidget {
               ),
               SlidableAction(
                 onPressed: ((context) {
-                  // do something
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditEventView(subjectId: event.subjectId),
+                    ),
+                  );
                 }),
                 backgroundColor: Colors.green,
                 label: 'Edit',

@@ -1,26 +1,27 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/main.dart';
 import 'package:geburtstagsliste/presentation/pages/subjects_view.dart';
-import 'package:uuid/uuid.dart';
 import '../../../models/subject.dart';
 import '../../widgets/bottomNavigation.dart';
 
-//This class represents the view for adding a new subject
+//This class represents the view for editing a subject
 class EditSubjectView extends ConsumerWidget {
-  // Constructor for the AddSubjectView widget
-  const EditSubjectView({Key? key}) : super(key: key);
+  final Subject subject;
+  final nameController = TextEditingController();
+  // Constructor for the EditSubjectView widget
+  EditSubjectView({required this.subject, Key? key}) : super(key: key) {
+    nameController.text = subject.name;
+  }
 
   // Build the widget's UI
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // Create a TextEditingController to manage the input for the subject name
-    TextEditingController nameController = TextEditingController();
+    log('Editing subject: ${subject.name} ${subject.id}');
     // Access the provider responsible for managing subjects
     final provider = ref.watch(refReminderAppStateProvider.notifier);
-    // Generate a unique ID for the new subject
-    var uuid = const Uuid();
-    var newUuid = uuid.v4();
 
     return Scaffold(
       appBar: AppBar(
@@ -33,8 +34,8 @@ class EditSubjectView extends ConsumerWidget {
           children: [
             // Create a TextFormField to capture the subject name
             TextFormField(
+              controller: nameController,
               autofocus: true, // Set autofocus for the input field
-              controller: nameController, // Associate the controller with the field
               decoration: InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
@@ -44,14 +45,12 @@ class EditSubjectView extends ConsumerWidget {
             const SizedBox(
               height: 16.0,
             ),
-            // Create an ElevatedButton to submit the new subject
+            // Create an ElevatedButton to submit the edited subject
             ElevatedButton(
               onPressed: () {
-                // Extract the subject name from the controller
-                String name = nameController.text;
-                String id = newUuid;
-                // Use the provider to add the new subject to the list
-                provider.addSubject(Subject(name: name, id: id));
+                String newName = nameController.text;
+                Subject updatedSubject = subject.copyWith(name: newName);
+                provider.editSubject(updatedSubject);
                 Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
