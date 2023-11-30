@@ -5,11 +5,14 @@ class Event {
   final DateTime date;
   // The ID of the subject to whom the event is associated.
   final String subjectId;
+  // The ID if the event to identify it
+  final String? eventId;
 
   Event({
     required this.title,
     required this.date,
     required this.subjectId,
+    this.eventId = null,
   });
 
   // Creates a copy of the event with the given updates.

@@ -106,6 +106,12 @@ class ReminderAppStateProvider extends Notifier<ReminderAppState> {
     );
   }
 
+  void editEvent(Event updatedEvent) {
+    state = state.copyWith(
+      events: state.events.map((s) => s.eventId == updatedEvent.eventId ? updatedEvent : s).toList(),
+    );
+  }
+
   void saveChangedEvent() {}
 
   void saveChangedSubject() {}

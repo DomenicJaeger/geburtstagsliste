@@ -74,7 +74,11 @@ class EditEventView extends ConsumerWidget {
                 //Check if a date was selected and create an Event object
                 if (chosenDate != null) {
                   //Add the event to the global app state using the provider
-                  provider.addEvent(Event(title: title, date: chosenDate!, subjectId: newSubjectId));
+                  provider.editEvent(Event(
+                    title: title,
+                    date: chosenDate!,
+                    subjectId: newSubjectId,
+                  ));
                 }
 
                 //Navigate to the SubectsView page after submitting the event

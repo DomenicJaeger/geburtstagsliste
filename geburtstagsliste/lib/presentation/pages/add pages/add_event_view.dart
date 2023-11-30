@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/models/event.dart';
 import 'package:geburtstagsliste/presentation/pages/subjects_view.dart';
+import 'package:uuid/uuid.dart';
 import '../../../main.dart';
 import '../../widgets/bottomNavigation.dart';
 
@@ -19,6 +20,8 @@ class AddEventView extends ConsumerWidget {
     DateTime? chosenDate;
     //Access the reminderAppStateProvider using the watch method
     final provider = ref.watch(refReminderAppStateProvider.notifier);
+    var uuid = const Uuid();
+    var newUuid = uuid.v4();
 
     return Scaffold(
       appBar: AppBar(
@@ -71,10 +74,11 @@ class AddEventView extends ConsumerWidget {
               onPressed: () {
                 //Extract the title and subject ID from the controllers
                 String title = titleController.text;
+                String eventId = newUuid;
                 //Check if a date was selected and create an Event object
                 if (chosenDate != null) {
                   //Add the event to the global app state using the provider
-                  provider.addEvent(Event(title: title, date: chosenDate!, subjectId: newSubjectId));
+                  provider.addEvent(Event(title: title, date: chosenDate!, subjectId: newSubjectId, eventId: eventId));
                 }
 
                 //Navigate to the SubectsView page after submitting the event
