@@ -15,12 +15,12 @@ class AddSubjectView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     // Create a TextEditingController to manage the input for the subject name
-    TextEditingController nameController = TextEditingController();
+    final nameController = TextEditingController();
     // Access the provider responsible for managing subjects
     final provider = ref.watch(refReminderAppStateProvider.notifier);
     // Generate a unique ID for the new subject
-    var uuid = const Uuid();
-    var newUuid = uuid.v4();
+    const uuid = Uuid();
+    final newUuid = uuid.v4();
 
     return Scaffold(
       appBar: AppBar(
@@ -48,8 +48,8 @@ class AddSubjectView extends ConsumerWidget {
             ElevatedButton(
               onPressed: () {
                 // Extract the subject name from the controller
-                String name = nameController.text;
-                String id = newUuid;
+                final name = nameController.text;
+                final id = newUuid;
                 // Use the provider to add the new subject to the list
                 provider.addSubject(Subject(name: name, id: id));
                 Navigator.pushReplacement(

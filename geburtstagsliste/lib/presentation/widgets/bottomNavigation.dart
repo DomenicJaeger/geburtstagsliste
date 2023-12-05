@@ -1,10 +1,11 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/presentation/pages/settings_view.dart';
 import 'package:geburtstagsliste/presentation/pages/subjects_view.dart';
+
 import '../pages/home_view.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 //Define a StateProvider for managing the navigation state
 final navigationStateProvider = StateProvider((ref) => NavigationState(selectedIndex: 0));
@@ -30,10 +31,9 @@ class BottomNavigationBarWidget extends ConsumerWidget {
       currentIndex: navigationState.selectedIndex,
 
       //Handle onTap events
-      onTap: (int index) {
+      onTap: (final index) {
         //Update the navigation state with the selected index
-        final navigationState = ref.read(navigationStateProvider);
-        navigationState.selectedIndex = index;
+        final navigationState = ref.read(navigationStateProvider)..selectedIndex = index;
 
         //Navigate to the corresponding screen based on the selected index
         switch (index) {

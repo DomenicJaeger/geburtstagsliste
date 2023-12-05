@@ -12,7 +12,7 @@ class Event {
     required this.title,
     required this.date,
     required this.subjectId,
-    this.eventId = null,
+    this.eventId,
   });
 
   // Creates a copy of the event with the given updates.
@@ -20,29 +20,28 @@ class Event {
     String? title,
     DateTime? date,
     String? subjectId,
-  }) {
-    return Event(
-      title: title ?? this.title,
-      date: date ?? this.date,
-      subjectId: subjectId ?? this.subjectId,
-    );
-  }
+    String? eventId,
+  }) =>
+      Event(
+        title: title ?? this.title,
+        date: date ?? this.date,
+        subjectId: subjectId ?? this.subjectId,
+        eventId: eventId ?? this.eventId,
+      );
 
   // Converts the event to a JSON object.
-  Map<String, dynamic> toJson() {
-    return {
-      'title': title,
-      'date': date.toIso8601String(),
-      'subjectId': subjectId,
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'title': title,
+        'date': date.toIso8601String(),
+        'subjectId': subjectId,
+        'eventId': eventId,
+      };
 
   // Creates a new event from a JSON object.
-  factory Event.fromJson(Map<String, dynamic> json) {
-    return Event(
-      title: json['title'],
-      date: DateTime.parse(json['date']),
-      subjectId: json['subjectId'],
-    );
-  }
+  factory Event.fromJson(Map<String, dynamic> json) => Event(
+        title: json['title'],
+        date: DateTime.parse(json['date']),
+        subjectId: json['subjectId'],
+        eventId: json['eventId'],
+      );
 }

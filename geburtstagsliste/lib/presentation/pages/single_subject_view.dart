@@ -5,12 +5,11 @@ import 'package:geburtstagsliste/main.dart';
 import 'package:geburtstagsliste/presentation/pages/add%20pages/add_event_view.dart';
 import 'package:geburtstagsliste/presentation/pages/edit%20pages/edit_event_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/bottomNavigation.dart';
-import '../../models/event.dart';
 import '../../models/subject.dart';
 
 class SingleSubjectView extends ConsumerWidget {
   final Subject subject;
-  const SingleSubjectView({Key? key, required this.subject}) : super(key: key);
+  const SingleSubjectView({required this.subject, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -19,7 +18,7 @@ class SingleSubjectView extends ConsumerWidget {
     // Get the provider for the app state
     final provider = ref.watch(refReminderAppStateProvider.notifier);
     final state = ref.watch(refReminderAppStateProvider);
-    List<Event> filteredEvents = state.events.where((event) => event.subjectId == subject.id).toList();
+    final filteredEvents = state.events.where((event) => event.subjectId == subject.id).toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(subject.name),
@@ -33,35 +32,26 @@ class SingleSubjectView extends ConsumerWidget {
           return Slidable(
             startActionPane: ActionPane(motion: const DrawerMotion(), children: [
               SlidableAction(
-                onPressed: ((context) {
-                  // do something
-                }),
-                backgroundColor: Colors.blue,
-                label: 'notes',
-                icon: Icons.comment_rounded,
-              ),
-              SlidableAction(
-                onPressed: ((context) {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditEventView(subjectId: event.subjectId),
-                    ),
-                  );
-                }),
-                backgroundColor: Colors.green,
-                label: 'Edit',
-                icon: Icons.edit,
-              ),
-            ]),
-            endActionPane: ActionPane(motion: const DrawerMotion(), children: [
-              SlidableAction(
-                onPressed: ((context) {
+                onPressed: (context) {
                   provider.deleteEvent(event);
-                }),
+                },
                 backgroundColor: Colors.red,
                 label: 'Delete',
                 icon: Icons.delete,
+              ),
+              SlidableAction(
+                onPressed: (context) {
+                  final currentEvent = event;
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EditEventView(event: currentEvent),
+                    ),
+                  );
+                },
+                backgroundColor: Colors.green,
+                label: 'Edit',
+                icon: Icons.edit,
               ),
             ]),
             child: ListTile(
@@ -78,7 +68,7 @@ class SingleSubjectView extends ConsumerWidget {
         child: const Icon(Icons.add),
         // Open the add event view when the floating action button is tapped
         onPressed: () {
-          String subjectId = subject.id;
+          final subjectId = subject.id;
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(

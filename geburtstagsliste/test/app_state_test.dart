@@ -31,7 +31,7 @@ void main() {
         Event(title: 'Geburtstag', date: DateTime(1991, 12, 14), subjectId: '007'),
         Event(title: 'Geburtstag', date: DateTime(1996, 8, 9), subjectId: '008'),
         Event(title: 'Geburtstag', date: DateTime(1980, 2, 12), subjectId: '009'),
-        Event(title: 'Geburtstag', date: DateTime(1995, 6, 1), subjectId: '010'),
+        Event(title: 'Geburtstag', date: DateTime(1995, 6), subjectId: '010'),
         Event(title: 'Geburtstag', date: DateTime(1993, 5, 29), subjectId: '011'),
         Event(title: 'Betriebsjubiläum', date: DateTime(1999, 3, 25), subjectId: '006'),
       ],
@@ -42,8 +42,6 @@ void main() {
     final appState2 = ReminderAppState.fromJson(json1);
 
     final json2 = appState2.toJson();
-    print(json1);
-    print(json2);
     expect(json1.toString(), json2.toString());
   });
 }

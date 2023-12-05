@@ -24,4 +24,5 @@ flutter:
   assets:
     - assets/subject.json
     - assets/event.json
+    - assets/images/default_avatar_1.png
   uses-material-design: true

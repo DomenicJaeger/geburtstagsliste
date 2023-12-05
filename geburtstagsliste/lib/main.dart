@@ -19,9 +19,9 @@ void main() async {
 final refReminderAppStateProvider = NotifierProvider<ReminderAppStateProvider, ReminderAppState>(
   () {
     // Initialize the ReminderAppStateProvider instace
-    final reminderAppStateProvider = ReminderAppStateProvider();
-    // Load the initial state of the reminders
-    reminderAppStateProvider.load();
+    final reminderAppStateProvider = ReminderAppStateProvider()
+      // Load the initial state of the reminders
+      ..load();
     // Return the initialized ReminderAppStateProvider
     return reminderAppStateProvider;
   },
@@ -39,8 +39,7 @@ class MainApp extends ConsumerWidget {
       if (previous != null) {
         if (previous.initialized) {
           // Save the current state of the reminders
-          final provider = ref.read(refReminderAppStateProvider.notifier);
-          provider.save();
+          final provider = ref.read(refReminderAppStateProvider.notifier)..save();
         }
       }
     });

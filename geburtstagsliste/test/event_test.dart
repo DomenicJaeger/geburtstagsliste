@@ -5,7 +5,7 @@ import 'package:geburtstagsliste/models/event.dart';
 
 void main() {
   test('werte von event testen', () {
-    var hochzeitstag = Event(title: 'Hochzeitstag', date: DateTime(2011, 10, 14), subjectId: '1A');
+    final hochzeitstag = Event(title: 'Hochzeitstag', date: DateTime(2011, 10, 14), subjectId: '1A');
 
     expect(hochzeitstag.title, 'Hochzeitstag');
     expect(
@@ -19,8 +19,8 @@ void main() {
   });
 
   test('copyWith() testen', () {
-    Event wichtigerTag = Event(title: 'wichtiger Tag', date: DateTime(1993, 5, 29), subjectId: 'Nummero Uno');
-    Event tagDanach = wichtigerTag.copyWith(date: wichtigerTag.date.add(const Duration(days: 1)));
+    final wichtigerTag = Event(title: 'wichtiger Tag', date: DateTime(1993, 5, 29), subjectId: 'Nummero Uno');
+    final tagDanach = wichtigerTag.copyWith(date: wichtigerTag.date.add(const Duration(days: 1)));
 
     expect(tagDanach.date, DateTime(1993, 5, 30));
 
@@ -28,10 +28,10 @@ void main() {
   });
 
   test('ne runde rechnen', () {
-    var geburtstag = Event(date: DateTime(1970, 1, 1), subjectId: '1', title: 'Geburtstag');
-    var now = DateTime.now();
+    final geburtstag = Event(date: DateTime(1970), subjectId: '1', title: 'Geburtstag');
+    final now = DateTime.now();
 
-    var difference = now.difference(geburtstag.date);
+    final difference = now.difference(geburtstag.date);
 
     print(difference.inDays / 365);
   });

@@ -48,8 +48,8 @@ class EditSubjectView extends ConsumerWidget {
             // Create an ElevatedButton to submit the edited subject
             ElevatedButton(
               onPressed: () {
-                String newName = nameController.text;
-                Subject updatedSubject = subject.copyWith(name: newName);
+                final newName = nameController.text;
+                final updatedSubject = subject.copyWith(name: newName);
                 provider.editSubject(updatedSubject);
                 Navigator.pushReplacement(
                   context,

@@ -1,12 +1,13 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:geburtstagsliste/main.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:geburtstagsliste/presentation/pages/add%20pages/add_subject_view.dart';
 import 'package:geburtstagsliste/presentation/pages/edit%20pages/edit_subject_view.dart';
 import 'package:geburtstagsliste/presentation/widgets/subject_card.dart';
+
 import '../../models/subject.dart';
 import '../widgets/bottomNavigation.dart';
 
@@ -35,7 +36,15 @@ class SubjectsView extends ConsumerWidget {
               Slidable(
                 startActionPane: ActionPane(motion: const DrawerMotion(), children: [
                   SlidableAction(
-                    onPressed: ((context) {
+                    onPressed: (context) {
+                      provider.deleteSubject(subject);
+                    },
+                    backgroundColor: Colors.red,
+                    label: 'Delete',
+                    icon: Icons.delete,
+                  ),
+                  SlidableAction(
+                    onPressed: (context) {
                       final currentSubject = subject;
                       log('Navigating to EditSubjectView with the subject: ${currentSubject.name} ${currentSubject.id}');
                       Navigator.pushReplacement(
@@ -44,20 +53,10 @@ class SubjectsView extends ConsumerWidget {
                           builder: (context) => EditSubjectView(subject: currentSubject),
                         ),
                       );
-                    }),
+                    },
                     backgroundColor: Colors.green,
                     label: 'Edit',
                     icon: Icons.edit,
-                  ),
-                ]),
-                endActionPane: ActionPane(motion: const DrawerMotion(), children: [
-                  SlidableAction(
-                    onPressed: ((context) {
-                      provider.deleteSubject(subject);
-                    }),
-                    backgroundColor: Colors.red,
-                    label: 'Delete',
-                    icon: Icons.delete,
                   ),
                 ]),
                 child: SubjectCard(

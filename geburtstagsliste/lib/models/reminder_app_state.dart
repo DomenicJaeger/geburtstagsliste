@@ -40,7 +40,13 @@ class ReminderAppState {
           Event(title: 'Geburtstag', date: DateTime(1991, 12, 14), subjectId: '007'),
           Event(title: 'Geburtstag', date: DateTime(1996, 8, 9), subjectId: '008'),
           Event(title: 'Geburtstag', date: DateTime(1980, 2, 12), subjectId: '009'),
-          Event(title: 'Geburtstag', date: DateTime(1995, 6, 1), subjectId: '010'),
+          Event(
+              title: 'Geburtstag',
+              date: DateTime(
+                1995,
+                6,
+              ),
+              subjectId: '010'),
           Event(title: 'Geburtstag', date: DateTime(1993, 5, 29), subjectId: '011'),
           Event(title: 'Betriebsjubiläum', date: DateTime(1999, 3, 25), subjectId: '006'),
         ],
@@ -51,31 +57,23 @@ class ReminderAppState {
     List<Subject>? subjects,
     List<Event>? events,
     bool? initialized,
-  }) {
-    return ReminderAppState(
-      subjects: subjects ?? this.subjects,
-      events: events ?? this.events,
-      initialized: initialized ?? this.initialized,
-    );
-  }
+  }) =>
+      ReminderAppState(
+        subjects: subjects ?? this.subjects,
+        events: events ?? this.events,
+        initialized: initialized ?? this.initialized,
+      );
 
   // Converts the state to a JSON object.
-  Map<String, dynamic> toJson() {
-    return {
-      'subjects': subjects.map((subject) => subject.toJson()).toList(),
-      'events': events.map((event) => event.toJson()).toList(),
-    };
-  }
+  Map<String, dynamic> toJson() => {
+        'subjects': subjects.map((subject) => subject.toJson()).toList(),
+        'events': events.map((event) => event.toJson()).toList(),
+      };
 
   // Creates a new state from a JSON object.
-  factory ReminderAppState.fromJson(Map<String, dynamic> json) {
-    return ReminderAppState(
-      subjects: json['subjects'].map<Subject>((subject) {
-        print(subject);
-        return Subject.fromJson(subject);
-      }).toList(),
-      events: json['events'].map<Event>((event) => Event.fromJson(event)).toList(),
-      initialized: false,
-    );
-  }
+  factory ReminderAppState.fromJson(Map<String, dynamic> json) => ReminderAppState(
+        subjects: json['subjects'].map<Subject>((subject) => Subject.fromJson(subject)).toList(),
+        events: json['events'].map<Event>((event) => Event.fromJson(event)).toList(),
+        initialized: false,
+      );
 }

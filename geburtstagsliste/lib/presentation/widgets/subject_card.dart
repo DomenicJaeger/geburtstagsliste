@@ -7,8 +7,8 @@ import 'package:geburtstagsliste/presentation/pages/single_subject_view.dart';
 class SubjectCard extends ConsumerWidget {
   //The event to be displayed
   const SubjectCard({
-    super.key,
     required this.subject,
+    super.key,
   });
 
   final Subject subject;
@@ -33,20 +33,12 @@ class SubjectCard extends ConsumerWidget {
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
                     width: 50.0,
                     height: 50.0,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.0),
-                          border: Border.all(
-                            color: Colors.brown.shade100,
-                            width: 1.0,
-                          ),
-                          color: Colors.lightBlue),
-                      child: const Text('IMAGE'),
+                    child: Image.asset(
+                      '${subject.image}',
                     ),
                   ),
                   Text(subject.name),

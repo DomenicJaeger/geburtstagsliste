@@ -8,13 +8,13 @@ import '../../models/subject.dart';
 
 int daysUntilEvent(Event event) {
   //Get today's date and time
-  DateTime today = DateTime.now();
+  final today = DateTime.now();
   //Create a copy of today's date with the hour, minute and second set to 0
-  DateTime todayAtMidnight = DateTime.now().copyWith(hour: 0, minute: 0, second: 0);
+  final todayAtMidnight = DateTime.now().copyWith(hour: 0, minute: 0, second: 0);
   //Create the date for the event in this year
-  DateTime newDate = DateTime(today.year, event.date.month, event.date.day);
+  final newDate = DateTime(today.year, event.date.month, event.date.day);
   //Create the date for the event in the next year
-  DateTime newDateNextYear = DateTime(newDate.year + 1, newDate.month, newDate.day);
+  final newDateNextYear = DateTime(newDate.year + 1, newDate.month, newDate.day);
 
   if (newDate.isBefore(todayAtMidnight)) {
     return newDateNextYear.difference(todayAtMidnight).inDays + 1;
@@ -27,9 +27,9 @@ int daysUntilEvent(Event event) {
 class EventCard extends ConsumerWidget {
   //The event to be displayed
   const EventCard({
-    super.key,
     required this.event,
     required this.subject,
+    super.key,
   });
 
   final Event event;
@@ -53,7 +53,7 @@ class EventCard extends ConsumerWidget {
     //Calculates the next age of the subject based on the event date.
     int nextAge2(Event event) {
       final int yearsDifference;
-      bool isBeforeToday = newDate.isBefore(todayAtMidnight);
+      final isBeforeToday = newDate.isBefore(todayAtMidnight);
 
       if (isBeforeToday) {
         yearsDifference = todayAtMidnight.year - event.date.year + 1;
@@ -84,7 +84,6 @@ class EventCard extends ConsumerWidget {
                 borderRadius: BorderRadius.circular(10.0),
                 border: Border.all(
                   color: Colors.brown.shade100,
-                  width: 1.0,
                 ),
                 color: Colors.white,
               ),
@@ -96,16 +95,7 @@ class EventCard extends ConsumerWidget {
                     SizedBox(
                       width: 50.0,
                       height: 50.0,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.0),
-                            border: Border.all(
-                              color: Colors.brown.shade100,
-                              width: 1.0,
-                            ),
-                            color: Colors.lightBlue),
-                        child: const Text('BILD'),
-                      ),
+                      child: Image.asset('${subject?.image}'),
                     ),
                     Column(
                       children: [

@@ -8,20 +8,20 @@ import '../../widgets/bottomNavigation.dart';
 
 class AddEventView extends ConsumerWidget {
   final String subjectId;
-  const AddEventView({Key? key, required this.subjectId}) : super(key: key);
+  const AddEventView({required this.subjectId, Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String newSubjectId = subjectId;
+    final newSubjectId = subjectId;
     //Create TextEditinControllers for managing the title and subjectID inputs
-    TextEditingController titleController = TextEditingController();
+    final titleController = TextEditingController();
 
     // Initialize a variable to store the selected date
     DateTime? chosenDate;
     //Access the reminderAppStateProvider using the watch method
     final provider = ref.watch(refReminderAppStateProvider.notifier);
-    var uuid = const Uuid();
-    var newUuid = uuid.v4();
+    const uuid = Uuid();
+    final newUuid = uuid.v4();
 
     return Scaffold(
       appBar: AppBar(
@@ -50,31 +50,18 @@ class AddEventView extends ConsumerWidget {
                 child: const Text('add Date'),
                 onPressed: () async {
                   //show the date picker and store the selected date
-                  chosenDate =
-                      await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1970, 1, 1), lastDate: DateTime(2070, 1, 1));
+                  chosenDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(1923), lastDate: DateTime(2043));
                 }),
 
             //Create a TextFormField for entering the event title
             const SizedBox(height: 16.0),
-            TextFormField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  labelText: 'subjectID'),
-              initialValue: newSubjectId,
-              readOnly: true,
-            ),
-            const SizedBox(
-              height: 16.0,
-            ),
 
             //Create an ElevatedButton to submit the event data
             ElevatedButton(
               onPressed: () {
                 //Extract the title and subject ID from the controllers
-                String title = titleController.text;
-                String eventId = newUuid;
+                final title = titleController.text;
+                final eventId = newUuid;
                 //Check if a date was selected and create an Event object
                 if (chosenDate != null) {
                   //Add the event to the global app state using the provider
